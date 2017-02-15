@@ -1,0 +1,55 @@
+canvas { 
+    border: 1px solid transparent;
+    display: inline-block;
+    position: relative;
+
+}
+
+form {
+	text-align: ;
+	display: inline-block;
+	position: absolute;
+	margin: 50px 20px 20px 0px;
+	font-family: 'Comfortaa', cursive;
+}
+
+li {
+	padding: 5px;
+}
+
+button {
+	display: inline-block;
+	position: absolute;
+	margin: 1px 20px 20px 50px;
+	font-family: 'Comfortaa', cursive;
+	background-color: orange;
+	color: whitesmoke;
+	font-size: 14px;
+	border-radius: 12px;
+	border-color: darkorange;
+}
+
+#remove:hover {
+	background-color: deeppink;
+}
+
+#places {
+	text-shadow: white 1px 1px 1px;
+}
+
+#spin {
+	float: ;
+	height: 30px;
+	width: 180px;
+	margin-left: 160px;
+	font-size: 16px;
+	background-color: orange;
+	color: whitesmoke;
+	border-radius: 12px;
+	border-color: darkorange;
+	font-family: 'Righteous', cursive;
+}
+
+#spin:hover {
+	background-color: deeppink;
+}

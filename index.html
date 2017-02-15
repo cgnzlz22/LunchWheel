@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+    <title>Canvas tutorial</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:700|Righteous" rel="stylesheet">
+</head>
+<body>
+	<div id="container" >
+    	<canvas id="myCanvas" width="500" height="500"></canvas>
+	<form method="Post" action="/" id="ul">
+		<ul id="places" style="list-style-type: none;">
+			<li>
+			<input type="checkbox" name="places" value="Five Guys">
+			Five Guys
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="PotBellys">
+			PotBellys
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Yummy Pho">
+			Yummy Pho
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Garlic Crush">
+			Garlic Crush
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Zeke's Pizza">
+			Zeke's Pizza
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Qdoba">
+			Qdoba
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Sunny Teriyaki">
+			Sunny Teriyaki
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Panera">
+			Panera
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Feed Co">
+			Feed Co
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Chipotle">
+			Chipotle
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Jack n the Box">
+			Jack n the Box
+			</li>
+			<li>
+			<input type="checkbox" name="places" value="Jimmy Johns">
+			Jimmy Johns
+			</li>
+		</ul>
+		<button id="remove" type="button">Remove Selected</button>
+	</form>
+	</div>
+	<input id="spin" type="button" value="Spin Me Right Round" onclick="spin();">
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.js"></script>
+    <script type="text/javascript" src="./js/game.js"></script>
+</body>
+</html>
