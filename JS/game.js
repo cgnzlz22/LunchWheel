@@ -1,77 +1,72 @@
 var colors = ["gold","yellow","greenyellow","limegreen","teal","mediumblue","darkslateblue",
 				"darkmagenta","mediumvioletred","red","tomato","orange"];
 
-var places = ["Five Guys","PotBellys","Yummy Pho","Garlic Crush","Zeke's Pizza","Qdoba",
-					"Sunny Teriyaki","Panera","Feed Co","Chipotle","Jack n the Box","Jimmy Johns"];
+var FFplaces = ["Five Guys","PotBellys","Yummy Pho","Garlic Crush","Zeke's Pizza","Qdoba",
+					"Sunny Teriyaki","Popeye's","Feed Co","Chipotle","Jack n the Box","Jimmy Johns"];
 
+var RSplaces = ["The Cheesecake Factory","Red Robin","Blue C Sushi","Spaghetti Factory","PF Changs",
+          "Thai Fusion Bistro","BJs Pizza & Brewery","Buffalo Wild Wings","The Melting Pot","Matador"];
+
+
+var currentPlaces = [];
 var startAngle = 0;
 var arc = Math.PI / 6;
-var spinTimeout = null;
+var spinTimeout = null; 
+var ticker;
+var tickerPosition;
+var tickerBounce;
+var tickerUp = false;
 var spinArcStart = 10;
 var spinTime = 0;
 var spinTimeTotal = 0;
 var ctx;
+var fastfoodTheme = '';
+var restaurantTheme = '';
+var themeSelectBox = document.getElementById('themeSelect');
 
-//create wheel within canvas
-function drawLunchWheel() {
+//code that runs immediately
+$(document).ready(function(){
+  selectTheme();
+  currentPlaces = (FFplaces || RSplaces).slice();
   var canvas = document.getElementById("myCanvas");
-  if (canvas.getContext) {
-    var outsideRadius = 200;
-    var insideRadius = 0;
-    var textRadius = 140;
-   
-    ctx = canvas.getContext("2d");
-    ctx.clearRect(0,0,500,500);
-   
-   //set font type, slice outline/shadow and fill
-    ctx.strokeStyle = "transparent";
-    ctx.lineWidth = 0;
-    ctx.font = 'bold 16px Arial';
-   
-    for(var i = 0; i < 12; i++) {
-      var angle = startAngle + i * arc;
-      ctx.fillStyle = colors[i];
-      ctx.shadowBlur = 20;
-      ctx.shadowColor = "darkslateblue";
-
-      ctx.beginPath();
-      ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
-      ctx.arc(250, 250, insideRadius, angle + arc, angle, false);
-      ctx.stroke();
-      ctx.fill();
-    //create fill text properties and placement/angle
-      ctx.save();
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
-      ctx.shadowBlur = 7;
-      ctx.shadowColor = "cyan";
-      ctx.fillStyle = "white";
-      ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
-        250 + Math.sin(angle + arc / 2) * textRadius);
-      ctx.rotate(angle + arc / 2);
-      var text = places[i];
-      ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-      ctx.restore();
-    }
-    //creat pointer
-    ctx.shadowOffsetX = 2;
-    ctx.shadowOffsetY = 2;
-    ctx.shadowBlur = 2;
-    ctx.shadowColor = "black";
-    ctx.fillStyle = "honeydew";
-    ctx.beginPath();
-    ctx.lineTo(250 + 15, 250 - (outsideRadius + 15));
-    ctx.lineTo(250 + 0, 250 - (outsideRadius - 25));5
-    ctx.lineTo(250 - 15, 250 - (outsideRadius + 15));
-    ctx.fill();
+  ctx = canvas.getContext("2d");
+  tickerPosition = {
+    left: {x: 265, y: 32},
+    right: {x: 250, y: 75},
+    bottom: {x: 235, y: 32}
   }
-}
+  reDrawWheel();
+});
+
+function selectTheme() {
+  document.getElementById('themeSelect').style.visibility = 'visible';
+  document.getElementById('submitTheme').addEventListener('click', setTheme);
+  }
+function setTheme() {
+  var themeSelection = document.getElementsByName('theme')[0].checked;
+  }
+function hideThemeSelect() {
+  themeSelectBox.style.visibility = 'hidden';
+  }
+function setFastfoodTheme() {
+  fastfoodTheme = 'fastfoodTheme';
+  bodyCss.style.backgroundImage = "url('./img/fastfood.png')";
+  hideThemeSelect();
+  }
+function setRestaurantsTheme() {
+  restaurantTheme = 'restaurantTheme';
+  bodyCss.style.backgroundImage = "url('./img/restaurant.jpg')";
+  hideThemeSelect();
+  }
+
 //set spin and rpm
 function spin() {
 	spinAngleStart = Math.random() * 10 + 10;
 	spinTime = 0;
-	spinTimeTotal = Math.random() * 3 + 4 * 3000;
-	rotateWheel();
+	spinTimeTotal = Math.random() * 3 + 4 * 3000;//start animation interval before calling rotate wheel
+	tickerBounce = 12;
+  ticker = setInterval(animateTicker, 150);
+  rotateWheel();
 }
 
 //set spin time and wheel roatation and stop
@@ -84,13 +79,14 @@ function rotateWheel(){
     //set spin timeout
 		var spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
 		startAngle += (spinAngle * Math.PI / 180);
-		drawLunchWheel();
-		spinTimeout = setTimeout('rotateWheel()', 15);
+		reDrawWheel();
+		spinTimeout = setTimeout('rotateWheel()', 30);
 }
 
 function stopRotateWheel(){
 	clearTimeout(spinTimeout);
-	var degrees = startAngle * 180 / Math.PI + 90;
+	clearInterval(ticker);
+  var degrees = startAngle * 180 / Math.PI + 90;
 	var arcd = arc * 180 / Math.PI;
 	var index = Math.floor((360 - degrees % 360) / arcd);
 	ctx.restore();
@@ -103,42 +99,87 @@ function easeOut(t, b, c, d) {
 	return b+c*(tc + -3*ts + 3*t);
 }
 
-//Checking to see if checkboxes were recognizing actual text that was checked. Remove once verified
-// $(function(){
-// $('input[type=checkbox]').on('change', function() {
-//     console.log($(this).val());
-// });
-// });
-
 $("#remove").click(function(e) {
-  $("input:checked").parent("li").remove();
   e.preventDefault();
+  $("input:checked").parent("li").remove();
+  var uncheckedBoxes = $("input").not(":checked");
+  currentPlaces = [];
+
+  for(var i = 0; i < uncheckedBoxes.length; i++){
+    console.log(uncheckedBoxes[i].value);
+    currentPlaces.push(uncheckedBoxes[i].value);
+  }
+
+  reDrawWheel(); //use currentPlaces to draw
 });
 
+function reDrawWheel() {
+  ctx.clearRect(0,0,500,500);
+  var outsideRadius = 210;
+  var insideRadius = 0;
+  var textRadius = 140;
 
-drawLunchWheel();
+  for(var i = 0; i < currentPlaces.length; i++) {
+    var arc = Math.PI / (currentPlaces.length / 2);
+    var angle = startAngle + i * arc;
+    ctx.fillStyle = colors[i];
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = "indigo";
 
+    ctx.beginPath();
+    ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
+    ctx.arc(250, 250, insideRadius, angle + arc, angle, false);
+    ctx.stroke();
+    ctx.fill();
 
-//  function reDrawWheel() {
-//  var unSelectedBoxes = input:"checked",
-//   for(var unSelectedBox) {
-//     $("input:checked").parent("li").remove();
-// }
-//   if(var i = 0; i < 12; i++) {
-//       var angle = startAngle + i * arc;
-//       ctx.fillStyle = colors[i];;
-//   }
-// else {
-//   (var i = 0; i < 12; i++) {
-//       var angle = startAngle + i * arc;
-//       ctx.fillStyle = colors[i];
-//       ctx.shadowBlur = 20;
-//       ctx.shadowColor = "darkslateblue";
-//     }
-//   }
-//  }
+    ctx.save();
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.shadowBlur = 9;
+    ctx.shadowColor = "cyan";
+    ctx.fillStyle = "white";
+    ctx.font = 'bold 18px Arial';
+    ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
+      250 + Math.sin(angle + arc / 2) * textRadius);
+    ctx.rotate(angle + arc / 2);
+    var text = currentPlaces[i];
+    ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+    ctx.restore();
+  }
 
+  //creat ticker // move to animate ticker function
+  ctx.shadowOffsetX = -3;
+  ctx.shadowOffsetY = -1;
+  ctx.shadowBlur = 5;
+  ctx.shadowColor = "black";
+  ctx.fillStyle = "honeydew";
+  ctx.beginPath();
+  ctx.lineTo(tickerPosition.left.x, tickerPosition.left.y);
+  ctx.lineTo(tickerPosition.right.x, tickerPosition.right.y);
+  ctx.lineTo(tickerPosition.bottom.x, tickerPosition.bottom.y);
+  ctx.fill();
+}
 
+function animateTicker(){
+  console.log("tick");
+
+  if(tickerUp){
+    tickerPosition.left.y += tickerBounce;
+    tickerPosition.right.y += tickerBounce;
+    tickerPosition.bottom.y += tickerBounce;
+  }
+  else {
+    tickerPosition.left.y -= tickerBounce;
+    tickerPosition.right.y -= tickerBounce;
+    tickerPosition.bottom.y -= tickerBounce;
+  }
+  tickerUp = !tickerUp;
+  tickerBounce -= 0.14;
+
+  if(tickerBounce <= 0){
+    tickerBounce = 0;
+  }
+}
 
 
 

@@ -1,12 +1,15 @@
+body {
+	background-size: 100%;
+}
+
 canvas { 
     border: 1px solid transparent;
     display: inline-block;
     position: relative;
-
+    margin-left: 200px;
 }
 
 form {
-	text-align: ;
 	display: inline-block;
 	position: absolute;
 	margin: 50px 20px 20px 0px;
@@ -41,7 +44,7 @@ button {
 	float: ;
 	height: 30px;
 	width: 180px;
-	margin-left: 160px;
+	margin-left: 360px;
 	font-size: 16px;
 	background-color: orange;
 	color: whitesmoke;
