@@ -11,7 +11,7 @@ var RSplaces = ["Cheesecake Factory","Red Robin","Blue C Sushi","Spaghetti Facto
 var currentPlaces = [];
 var startAngle = 0;
 var arc = Math.PI / 6;
-var spinTimeout = null; 
+var spinTimeout = null;
 var ticker;
 var tickerPosition;
 var tickerBounce;
@@ -55,23 +55,58 @@ function setTheme() {
 }
 function setFastfoodTheme() {
     fastfoodTheme = 'fastfoodTheme';
-    backgroundImage = "url('./img/fastfood.png')";
+    document.getElementsByTagName("body")[0].style.background = "url('./Img/fastfood.png')";
     currentPlaces = (FFplaces).slice();
 
     reDrawWheel();
 
     console.log(currentPlaces, "set fast food here");
 
+    //Set the fastfood checkboxes
+    //First remove what's already there
+    document.getElementById("FFplaces").innerHTML = '';
+
+    for(var i = 0; i < FFplaces.length; i++){
+      var newLi = document.createElement("li");
+      var span = document.createElement("span");
+      span.innerHTML = FFplaces[i];
+      var newInput = document.createElement("input");
+      newInput.type = "checkbox";
+      newInput.name = "FFplaces";
+      newInput.value = FFplaces[i];
+
+      newLi.appendChild(newInput);
+      newLi.appendChild(span);
+
+      document.getElementById("FFplaces").appendChild(newLi);
+    }
   }
 
 function setRestaurantsTheme() {
   restaurantTheme = 'restaurantTheme';
-  backgroundImage = "url('./img/restaurant.jpg')";
+  document.getElementsByTagName("body")[0].style.background = "url('./Img/restaurant.jpg')";
   // hideThemeSelect();
   currentPlaces = (RSplaces).slice();
   reDrawWheel();
   console.log(currentPlaces, "set resraunts here");
-  // return RSplaces
+
+  //Set the restaurants checkboxes
+  //First remove what's already there
+  document.getElementById("FFplaces").innerHTML = '';
+
+  for(var i = 0; i < RSplaces.length; i++){
+      var newLi = document.createElement("li");
+      var span = document.createElement("span");
+      span.innerHTML = RSplaces[i];
+      var newInput = document.createElement("input");
+      newInput.type = "checkbox";
+      newInput.name = "FFplaces";
+      newInput.value = RSplaces[i];
+      newLi.appendChild(newInput);
+      newLi.appendChild(span);
+
+      document.getElementById("FFplaces").appendChild(newLi);
+    }
 }
 function hideThemeSelect() {
   themeSelectBox.style.visibility = 'hidden';
@@ -120,8 +155,8 @@ function easeOut(t, b, c, d) {
 
 $("#remove").click(function(e) {
   e.preventDefault();
-  $("input:checked").parent("li").remove();
   var uncheckedBoxes = $("input").not(":checked");
+  $("input[type=checkbox]:checked").parent().remove();
   currentPlaces = [];
 
   // this for loop is looking at every unchecked box *****HINT!!!!!!!!!!!!!!!!!!!!!! slack me if you need another hint
@@ -134,19 +169,6 @@ $("#remove").click(function(e) {
 });
 
 function reDrawWheel() {
-  // just code
-    // target documentbyid(ffplaces)
-      //toggle hide on
-    //target documentbyid(rsplaces)
-      //toggle hide off
-// $("#submitTheme").hide();
-// $("#restaurantsSelect").on('click',
-//     function()
-//     {
-//         $("#FFplaces, #RSplaces").toggle();
-//     }
-// );
-// $('thing').toggleClass()
   // just code!!!
   ctx.clearRect(0,0,500,500);
   var outsideRadius = 230;
@@ -173,7 +195,7 @@ function reDrawWheel() {
     ctx.shadowColor = "cyan";
     ctx.fillStyle = "white";
     ctx.font = 'bold 16px Arial';
-    ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
+    ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius,
       250 + Math.sin(angle + arc / 2) * textRadius);
     ctx.rotate(angle + arc / 2);
     var text = currentPlaces[i];
