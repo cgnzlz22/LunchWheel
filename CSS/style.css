@@ -2,6 +2,23 @@ body {
 	background-size: 100%;
 }
 
+#submitTheme {
+	font-family: 'Righteous', cursive;
+	background-color: orange;
+	color: whitesmoke;
+	font-size: 14px;
+	border-radius: 12px;
+	border-color: darkorange;
+}
+#submitTheme:hover {
+	background-color: deeppink;
+}
+
+label {
+	font-family: 'Comfortaa', cursive;
+	font-size: 14px;
+}
+
 canvas { 
     border: 1px solid transparent;
     display: inline-block;
@@ -20,11 +37,11 @@ li {
 	padding: 5px;
 }
 
-button {
+#remove {
 	display: inline-block;
 	position: absolute;
 	margin: 1px 20px 20px 50px;
-	font-family: 'Comfortaa', cursive;
+	font-family: 'Righteous', cursive;
 	background-color: orange;
 	color: whitesmoke;
 	font-size: 14px;

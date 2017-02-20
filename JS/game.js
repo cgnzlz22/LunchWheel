@@ -4,7 +4,7 @@ var colors = ["gold","yellow","greenyellow","limegreen","teal","mediumblue","dar
 var FFplaces = ["Five Guys","PotBellys","Yummy Pho","Garlic Crush","Zeke's Pizza","Qdoba",
 					"Sunny Teriyaki","Popeye's","Feed Co","Chipotle","Jack n the Box","Jimmy Johns"];
 
-var RSplaces = ["The Cheesecake Factory","Red Robin","Blue C Sushi","Spaghetti Factory","PF Changs",
+var RSplaces = ["Cheesecake Factory","Red Robin","Blue C Sushi","Spaghetti Factory","PF Changs",
           "Thai Fusion Bistro","BJs Pizza & Brewery","Buffalo Wild Wings","The Melting Pot","Matador"];
 
 
@@ -23,41 +23,60 @@ var ctx;
 var fastfoodTheme = '';
 var restaurantTheme = '';
 var themeSelectBox = document.getElementById('themeSelect');
+var backgroundImage = '';
 
 //code that runs immediately
 $(document).ready(function(){
   selectTheme();
-  currentPlaces = (FFplaces || RSplaces).slice();
+  currentPlaces = (FFplaces).slice();
+  // console.log(currentPlaces, "should be defined here");
   var canvas = document.getElementById("myCanvas");
   ctx = canvas.getContext("2d");
   tickerPosition = {
-    left: {x: 265, y: 32},
-    right: {x: 250, y: 75},
-    bottom: {x: 235, y: 32}
+    left: {x: 265, y: 12},
+    right: {x: 250, y: 50},
+    bottom: {x: 235, y: 12}
   }
+
   reDrawWheel();
 });
 
 function selectTheme() {
   document.getElementById('themeSelect').style.visibility = 'visible';
   document.getElementById('submitTheme').addEventListener('click', setTheme);
-  }
+
 function setTheme() {
-  var themeSelection = document.getElementsByName('theme')[0].checked;
+    if (document.getElementsByName('theme')[0].checked){
+      setFastfoodTheme();
+    }else if(document.getElementsByName('theme')[1].checked){
+      setRestaurantsTheme();
+    }
   }
-function hideThemeSelect() {
-  themeSelectBox.style.visibility = 'hidden';
-  }
+}
 function setFastfoodTheme() {
-  fastfoodTheme = 'fastfoodTheme';
-  bodyCss.style.backgroundImage = "url('./img/fastfood.png')";
-  hideThemeSelect();
+    fastfoodTheme = 'fastfoodTheme';
+    backgroundImage = "url('./img/fastfood.png')";
+    currentPlaces = (FFplaces).slice();
+
+    reDrawWheel();
+
+    console.log(currentPlaces, "set fast food here");
+
   }
+
 function setRestaurantsTheme() {
   restaurantTheme = 'restaurantTheme';
-  bodyCss.style.backgroundImage = "url('./img/restaurant.jpg')";
-  hideThemeSelect();
-  }
+  backgroundImage = "url('./img/restaurant.jpg')";
+  // hideThemeSelect();
+  currentPlaces = (RSplaces).slice();
+  reDrawWheel();
+  console.log(currentPlaces, "set resraunts here");
+  // return RSplaces
+}
+function hideThemeSelect() {
+  themeSelectBox.style.visibility = 'hidden';
+  console.log('I was called!!!')
+}
 
 //set spin and rpm
 function spin() {
@@ -105,7 +124,8 @@ $("#remove").click(function(e) {
   var uncheckedBoxes = $("input").not(":checked");
   currentPlaces = [];
 
-  for(var i = 0; i < uncheckedBoxes.length; i++){
+  // this for loop is looking at every unchecked box *****HINT!!!!!!!!!!!!!!!!!!!!!! slack me if you need another hint
+  for(var i = 0; i < (uncheckedBoxes).length; i++){
     console.log(uncheckedBoxes[i].value);
     currentPlaces.push(uncheckedBoxes[i].value);
   }
@@ -114,11 +134,25 @@ $("#remove").click(function(e) {
 });
 
 function reDrawWheel() {
+  // just code
+    // target documentbyid(ffplaces)
+      //toggle hide on
+    //target documentbyid(rsplaces)
+      //toggle hide off
+// $("#submitTheme").hide();
+// $("#restaurantsSelect").on('click',
+//     function()
+//     {
+//         $("#FFplaces, #RSplaces").toggle();
+//     }
+// );
+// $('thing').toggleClass()
+  // just code!!!
   ctx.clearRect(0,0,500,500);
-  var outsideRadius = 210;
+  var outsideRadius = 230;
   var insideRadius = 0;
   var textRadius = 140;
-
+  console.log(currentPlaces.length)
   for(var i = 0; i < currentPlaces.length; i++) {
     var arc = Math.PI / (currentPlaces.length / 2);
     var angle = startAngle + i * arc;
@@ -138,7 +172,7 @@ function reDrawWheel() {
     ctx.shadowBlur = 9;
     ctx.shadowColor = "cyan";
     ctx.fillStyle = "white";
-    ctx.font = 'bold 18px Arial';
+    ctx.font = 'bold 16px Arial';
     ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
       250 + Math.sin(angle + arc / 2) * textRadius);
     ctx.rotate(angle + arc / 2);
@@ -161,7 +195,7 @@ function reDrawWheel() {
 }
 
 function animateTicker(){
-  console.log("tick");
+  // console.log("tick");
 
   if(tickerUp){
     tickerPosition.left.y += tickerBounce;

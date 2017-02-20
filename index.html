@@ -8,22 +8,18 @@
 </head>
 <body>
 	<div class='textBox' id='themeSelect'>
-			<div id='themeSelect2'>
-				<h2>Choose a Wheel</h2>
-				<div id='themeBox'>
-					<input type='radio' name='theme' value='fastfood'>
-					<label id='fastfoodSelect'>Fast Food</label>
-					<br>
-					<input type='radio' name='theme' value='restaurants'>
-					<label id='restaurantsSelect'>Sit Down Restaurants</label>
-				</div>
-			</div>
-				<button id='submitTheme'>Submit</button>
+		<input id='fastfoodSelect' type='radio' name='theme' value='fastfood'>
+			<label>Fast Food</label>
+		<br>
+		<input id='restaurantsSelect' type='radio' name='theme' value='restaurants'>
+			<label>Sit Down Restaurants</label>
+		<br>
+		<button id='submitTheme'>Choose A Wheel</button>
 	</div>
 	<div id="container" >
     	<canvas id="myCanvas" width="500" height="500"></canvas>
 	<form method="Post" action="/" id="ul">
-		<ul id="FFplaces" style="list-style-type: none;">
+		<ul id="FFplaces" class ="FFplaces" style="list-style-type: none;">
 			<li>
 			<input type="checkbox" name="FFplaces" value="Five Guys">
 			Five Guys
@@ -73,10 +69,10 @@
 			Jimmy Johns
 			</li>
 		</ul>
-		<ul id="RSplaces" style="list-style-type: none;" hidden>
+		<ul id="RSplaces" class ="RSplaces" style="list-style-type: none;" hidden>
 			<li>
-			<input type="checkbox" name="RSplaces" value="The Cheesecake Factory">
-			The Cheesecake Factory
+			<input type="checkbox" name="RSplaces" value="Cheesecake Factory">
+			Cheesecake Factory
 			</li>
 			<li>
 			<input type="checkbox" name="RSplaces" value="Red Robin">
