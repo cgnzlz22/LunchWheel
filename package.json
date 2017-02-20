@@ -1,0 +1,24 @@
+{
+  "name": "LunchWheel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "theme.js",
+  "dependencies": {
+    "browser-sync": "^2.18.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node_modules/browser-sync/bin/browser-sync.js start --server . --files ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandiw/LunchWheel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandiw/LunchWheel/issues"
+  },
+  "homepage": "https://github.com/brandiw/LunchWheel#readme"
+}
