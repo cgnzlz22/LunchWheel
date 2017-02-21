@@ -24,7 +24,9 @@ var fastfoodTheme = '';
 var restaurantTheme = '';
 var themeSelectBox = document.getElementById('themeSelect');
 var backgroundImage = '';
+var wheelofSound;
 var spinmeSound;
+
 
 //code that runs immediately
 $(document).ready(function(){
@@ -39,6 +41,9 @@ $(document).ready(function(){
     bottom: {x: 235, y: 12}
   }
     
+  wheelofSound = document.getElementById("wheelof");
+  wheelofSound.play();
+     
   spinmeSound = document.getElementById("spinme");
   spinmeSound.play();
 
@@ -125,8 +130,8 @@ function spin() {
 	tickerBounce = 12;
   ticker = setInterval(animateTicker, 150);
   rotateWheel();
-  var whatdoyouwantSound = document.getElementById("whatdoyouwant");
-  whatdoyouwantSound.play()
+  var notthatsimpleSound = document.getElementById("notthatsimple");
+  notthatsimpleSound.play()
 }
 
 //set spin time and wheel roatation and stop
@@ -165,8 +170,8 @@ $("#remove").click(function(e) {
   $("input[type=checkbox]:checked").parent().remove();
   currentPlaces = [];
 
-  var notthatsimpleSound = document.getElementById("notthatsimple");
-  notthatsimpleSound.play()
+  var whatdoyouwantSound = document.getElementById("whatdoyouwant");
+  whatdoyouwantSound.play()
 
   for(var i = 0; i < (uncheckedBoxes).length; i++){
     console.log(uncheckedBoxes[i].value);
@@ -174,6 +179,7 @@ $("#remove").click(function(e) {
   }
 
   reDrawWheel(); //use currentPlaces to draw
+
 });
 
 function reDrawWheel() {
@@ -223,6 +229,7 @@ function reDrawWheel() {
   ctx.lineTo(tickerPosition.bottom.x, tickerPosition.bottom.y);
   ctx.fill();
 }
+
 
 function animateTicker(){
   // console.log("tick");

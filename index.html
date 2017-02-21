@@ -8,15 +8,15 @@
 </head>
 <body background="./Img/fastfood.png">
 	<div class='textBox' id='themeSelect'>
-		<input id='fastfoodSelect' type='radio' name='theme' value='' checked>
+		<input id='fastfoodSelect' type='radio' name='theme' value='Pick Left &#x2191' checked>
 			<label>Fast Food</label>
 		<br>
-		<input id='restaurantsSelect' type='radio' name='theme' value=''>
+		<input id='restaurantsSelect' type='radio' name='theme' value='Pick Right &#x2193'>
 			<label>Sit Down Restaurants</label>
 		<br>
-		<button id='submitTheme'>Choose A Wheel</button>
 	</div>
-	<div id="container" >
+	<button id='submitTheme'>Choose A Wheel</button>
+	<div id="container">
     	<canvas id="myCanvas" width="490" height="490"></canvas>
 	<form method="Post" action="/" id="ul">
 		<ul id="FFplaces" class ="FFplaces" style="list-style-type: none;">
@@ -74,10 +74,10 @@
 	</div>
 	<button id="spin" type="button" onclick="spin();">Spin Me Right Round</button>
 
-  	<audio id="whatdoyouwant" src=".wav"></audio>
-  	<audio id="notthatsimple" src=".wav"></audio>
-  	<audio id="spinme" loop src=".wav"></audio>
-
+  	<audio id="whatdoyouwant" src="sounds/whatdoyouwant1.m4a"></audio>
+  	<audio id="notthatsimple" src="sounds/notthatsimple.m4a"></audio>
+  	<audio id="spinme" loop src="sounds/spinme.m4a"></audio>
+  	<audio id="wheelof" src="sounds/foodfood.m4a"></audio>
 
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.js"></script>
     <script type="text/javascript" src="./js/game.js"></script>

@@ -3,10 +3,14 @@ body {
 	
 }
 
-#fastfoodSelect #restaurantsSelect {
+#themeSelect {
+	font-family: 'Comfortaa', cursive;
+	font-size: 14px;
+	color: indigo;
 	background-color: white;
-	margin: 10px;
-	padding: 15px;
+	border: solid indigo 2px;
+	width: 185px;
+	padding: 1px 10px 1px 15px;
 }
 
 #submitTheme {
@@ -16,23 +20,16 @@ body {
 	font-size: 14px;
 	border-radius: 12px;
 	border-color: darkorange;
+	margin: 1px 5px 5px 40px;
 }
 #submitTheme:hover {
 	background-color: deeppink;
 }
 
-label {
-	font-family: 'Comfortaa', cursive;
-	font-size: 14px;
-	color: indigo;
-	text-shadow: silver 1px 1px 1px;
-}
-
 canvas { 
-    border: 1px solid transparent;
     display: inline-block;
     position: relative;
-    margin-left: 200px;
+    margin-left: 180px;
 }
 
 form {
@@ -42,17 +39,18 @@ form {
 	background-color: white;
 	padding-right: 30px;
 	border: solid indigo 3px;
-	/*add indigo shadow to box perhaps change font color*/
+	color: indigo;
+	margin-left: 50px;
 }
 
 li {
-	padding: 5px;
+	padding: 3px 0px 2px 0px;
 }
 
 #remove {
 	display: inline-block;
 	position: absolute;
-	margin: 5px 20px 20px 50px;
+	margin: 4px 20px 20px 50px;
 	font-family: 'Righteous', cursive;
 	background-color: orange;
 	color: whitesmoke;
@@ -69,7 +67,7 @@ li {
 #spin {
 	height: 38px;
 	width: 180px;
-	margin-left: 360px;
+	margin-left: 340px;
 	font-size: 16px;
 	background-color: orange;
 	color: whitesmoke;
