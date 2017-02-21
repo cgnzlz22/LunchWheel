@@ -1,5 +1,12 @@
 body {
 	background-size: 100%;
+	
+}
+
+#fastfoodSelect #restaurantsSelect {
+	background-color: white;
+	margin: 10px;
+	padding: 15px;
 }
 
 #submitTheme {
@@ -17,6 +24,8 @@ body {
 label {
 	font-family: 'Comfortaa', cursive;
 	font-size: 14px;
+	color: indigo;
+	text-shadow: silver 1px 1px 1px;
 }
 
 canvas { 
@@ -29,8 +38,11 @@ canvas {
 form {
 	display: inline-block;
 	position: absolute;
-	margin: 50px 20px 20px 0px;
 	font-family: 'Comfortaa', cursive;
+	background-color: white;
+	padding-right: 30px;
+	border: solid indigo 3px;
+	/*add indigo shadow to box perhaps change font color*/
 }
 
 li {
@@ -40,7 +52,7 @@ li {
 #remove {
 	display: inline-block;
 	position: absolute;
-	margin: 1px 20px 20px 50px;
+	margin: 5px 20px 20px 50px;
 	font-family: 'Righteous', cursive;
 	background-color: orange;
 	color: whitesmoke;
@@ -53,13 +65,9 @@ li {
 	background-color: deeppink;
 }
 
-#places {
-	text-shadow: white 1px 1px 1px;
-}
 
 #spin {
-	float: ;
-	height: 30px;
+	height: 38px;
 	width: 180px;
 	margin-left: 360px;
 	font-size: 16px;

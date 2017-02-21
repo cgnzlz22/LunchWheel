@@ -24,6 +24,7 @@ var fastfoodTheme = '';
 var restaurantTheme = '';
 var themeSelectBox = document.getElementById('themeSelect');
 var backgroundImage = '';
+var spinmeSound;
 
 //code that runs immediately
 $(document).ready(function(){
@@ -37,6 +38,9 @@ $(document).ready(function(){
     right: {x: 250, y: 50},
     bottom: {x: 235, y: 12}
   }
+    
+  spinmeSound = document.getElementById("spinme");
+  spinmeSound.play();
 
   reDrawWheel();
 });
@@ -84,7 +88,7 @@ function setFastfoodTheme() {
 
 function setRestaurantsTheme() {
   restaurantTheme = 'restaurantTheme';
-  document.getElementsByTagName("body")[0].style.background = "url('./Img/restaurant.jpg')";
+  document.getElementsByTagName("body")[0].style.background = "url('./Img/restaurant2.png')";
   // hideThemeSelect();
   currentPlaces = (RSplaces).slice();
   reDrawWheel();
@@ -121,6 +125,8 @@ function spin() {
 	tickerBounce = 12;
   ticker = setInterval(animateTicker, 150);
   rotateWheel();
+  var whatdoyouwantSound = document.getElementById("whatdoyouwant");
+  whatdoyouwantSound.play()
 }
 
 //set spin time and wheel roatation and stop
@@ -159,7 +165,9 @@ $("#remove").click(function(e) {
   $("input[type=checkbox]:checked").parent().remove();
   currentPlaces = [];
 
-  // this for loop is looking at every unchecked box *****HINT!!!!!!!!!!!!!!!!!!!!!! slack me if you need another hint
+  var notthatsimpleSound = document.getElementById("notthatsimple");
+  notthatsimpleSound.play()
+
   for(var i = 0; i < (uncheckedBoxes).length; i++){
     console.log(uncheckedBoxes[i].value);
     currentPlaces.push(uncheckedBoxes[i].value);
@@ -179,7 +187,7 @@ function reDrawWheel() {
     var arc = Math.PI / (currentPlaces.length / 2);
     var angle = startAngle + i * arc;
     ctx.fillStyle = colors[i];
-    ctx.shadowBlur = 20;
+    ctx.shadowBlur = 15;
     ctx.shadowColor = "indigo";
 
     ctx.beginPath();
@@ -236,12 +244,6 @@ function animateTicker(){
     tickerBounce = 0;
   }
 }
-
-
-
-
-
-
 
 
 
