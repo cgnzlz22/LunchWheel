@@ -64,7 +64,7 @@ function setTheme() {
 }
 function setFastfoodTheme() {
     fastfoodTheme = 'fastfoodTheme';
-    document.getElementsByTagName("body")[0].style.background = "url('./img/fastfood.png')";
+    document.getElementsByTagName("body")[0].style.background = "url('./Img/fastfood.png')";
     currentPlaces = (FFplaces).slice();
 
     reDrawWheel();
@@ -93,7 +93,7 @@ function setFastfoodTheme() {
 
 function setRestaurantsTheme() {
   restaurantTheme = 'restaurantTheme';
-  document.getElementsByTagName("body")[0].style.background = "url('./img/restaurant2.png')";
+  document.getElementsByTagName("body")[0].style.background = "url('./Img/restaurant2.png')";
   // hideThemeSelect();
   currentPlaces = (RSplaces).slice();
   reDrawWheel();
