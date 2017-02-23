@@ -166,7 +166,7 @@ function easeOut(t, b, c, d) {
 
 $("#remove").click(function(e) {
   e.preventDefault();
-  var uncheckedBoxes = $("input").not(":checked");
+  var uncheckedBoxes = $("input[type=checkbox]").not(":checked");
   $("input[type=checkbox]:checked").parent().remove();
   currentPlaces = [];
 
