@@ -1,8 +1,8 @@
 var colors = ["gold","yellow","greenyellow","limegreen","teal","mediumblue","darkslateblue",
-				"darkmagenta","mediumvioletred","red","tomato","orange"];
+        "darkmagenta","mediumvioletred","red","tomato","orange"];
 
 var FFplaces = ["Five Guys","PotBellys","Yummy Pho","Garlic Crush","Zeke's Pizza","Qdoba",
-					"Sunny Teriyaki","Popeye's","Feed Co","Chipotle","Jack n the Box","Jimmy Johns"];
+          "Sunny Teriyaki","Popeye's","Feed Co","Chipotle","Jack n the Box","Jimmy Johns"];
 
 var RSplaces = ["Cheesecake Factory","Red Robin","Blue C Sushi","Spaghetti Factory","PF Changs",
           "Thai Fusion Bistro","BJs Pizza & Brewery","Buffalo Wild Wings","The Melting Pot","Matador"];
@@ -40,10 +40,10 @@ $(document).ready(function(){
     right: {x: 250, y: 50},
     bottom: {x: 235, y: 12}
   }
-    
+
   wheelofSound = document.getElementById("wheelof");
   wheelofSound.play();
-     
+
   spinmeSound = document.getElementById("spinme");
   spinmeSound.play();
 
@@ -56,16 +56,17 @@ function selectTheme() {
 
 function setTheme() {
     if (document.getElementsByName('theme')[0].checked){
-      setFastfoodTheme();
+      fastfoodTheme = 'fastfoodTheme';
+      setPlaceTheme(FFplaces, "url('./Img/fastfood.png')");
     }else if(document.getElementsByName('theme')[1].checked){
-      setRestaurantsTheme();
+      restaurantTheme = 'restaurantTheme';
+      setPlaceTheme(RSplaces, "url('./Img/restaurant2.png')");
     }
   }
 }
-function setFastfoodTheme() {
-    fastfoodTheme = 'fastfoodTheme';
-    document.getElementsByTagName("body")[0].style.background = "url('./Img/fastfood.png')";
-    currentPlaces = (FFplaces).slice();
+function setPlaceTheme(placesArray, backgroundImage){
+    document.getElementsByTagName("body")[0].style.background = backgroundImage;
+    currentPlaces = placesArray.slice();
 
     reDrawWheel();
 
@@ -75,48 +76,22 @@ function setFastfoodTheme() {
     //First remove what's already there
     document.getElementById("FFplaces").innerHTML = '';
 
-    for(var i = 0; i < FFplaces.length; i++){
+    for(var i = 0; i < placesArray.length; i++){
       var newLi = document.createElement("li");
       var span = document.createElement("span");
-      span.innerHTML = FFplaces[i];
+      span.innerHTML = placesArray[i];
       var newInput = document.createElement("input");
       newInput.type = "checkbox";
       newInput.name = "FFplaces";
-      newInput.value = FFplaces[i];
+      newInput.value = placesArray[i];
 
-      newLi.appendChild(newInput);
-      newLi.appendChild(span);
-
-      document.getElementById("FFplaces").appendChild(newLi);
-    }
-  }
-
-function setRestaurantsTheme() {
-  restaurantTheme = 'restaurantTheme';
-  document.getElementsByTagName("body")[0].style.background = "url('./Img/restaurant2.png')";
-  // hideThemeSelect();
-  currentPlaces = (RSplaces).slice();
-  reDrawWheel();
-  console.log(currentPlaces, "set resraunts here");
-
-  //Set the restaurants checkboxes
-  //First remove what's already there
-  document.getElementById("FFplaces").innerHTML = '';
-
-  for(var i = 0; i < RSplaces.length; i++){
-      var newLi = document.createElement("li");
-      var span = document.createElement("span");
-      span.innerHTML = RSplaces[i];
-      var newInput = document.createElement("input");
-      newInput.type = "checkbox";
-      newInput.name = "FFplaces";
-      newInput.value = RSplaces[i];
       newLi.appendChild(newInput);
       newLi.appendChild(span);
 
       document.getElementById("FFplaces").appendChild(newLi);
     }
 }
+
 function hideThemeSelect() {
   themeSelectBox.style.visibility = 'hidden';
   console.log('I was called!!!')
@@ -124,10 +99,10 @@ function hideThemeSelect() {
 
 //set spin and rpm
 function spin() {
-	spinAngleStart = Math.random() * 10 + 10;
-	spinTime = 0;
-	spinTimeTotal = Math.random() * 3 + 4 * 3000;//start animation interval before calling rotate wheel
-	tickerBounce = 12;
+  spinAngleStart = Math.random() * 10 + 10;
+  spinTime = 0;
+  spinTimeTotal = Math.random() * 3 + 4 * 3000;//start animation interval before calling rotate wheel
+  tickerBounce = 12;
   ticker = setInterval(animateTicker, 150);
   rotateWheel();
   var notthatsimpleSound = document.getElementById("notthatsimple");
@@ -136,32 +111,32 @@ function spin() {
 
 //set spin time and wheel roatation and stop
 function rotateWheel(){
-	spinTime += 30;
-	if(spinTime >= spinTimeTotal){
-		stopRotateWheel();
-		return;
-	}
+  spinTime += 30;
+  if(spinTime >= spinTimeTotal){
+    stopRotateWheel();
+    return;
+  }
     //set spin timeout
-		var spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-		startAngle += (spinAngle * Math.PI / 180);
-		reDrawWheel();
-		spinTimeout = setTimeout('rotateWheel()', 30);
+    var spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+    startAngle += (spinAngle * Math.PI / 180);
+    reDrawWheel();
+    spinTimeout = setTimeout('rotateWheel()', 30);
 }
 
 function stopRotateWheel(){
-	clearTimeout(spinTimeout);
-	clearInterval(ticker);
+  clearTimeout(spinTimeout);
+  clearInterval(ticker);
   var degrees = startAngle * 180 / Math.PI + 90;
-	var arcd = arc * 180 / Math.PI;
-	var index = Math.floor((360 - degrees % 360) / arcd);
-	ctx.restore();
+  var arcd = arc * 180 / Math.PI;
+  var index = Math.floor((360 - degrees % 360) / arcd);
+  ctx.restore();
 }
 
 //slow spinning down when wheel starts stopping
 function easeOut(t, b, c, d) {
-	var ts = (t/=d)*t;
-	var tc = ts*t;
-	return b+c*(tc + -3*ts + 3*t);
+  var ts = (t/=d)*t;
+  var tc = ts*t;
+  return b+c*(tc + -3*ts + 3*t);
 }
 
 $("#remove").click(function(e) {
@@ -251,14 +226,3 @@ function animateTicker(){
     tickerBounce = 0;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
