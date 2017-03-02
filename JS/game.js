@@ -139,14 +139,14 @@ function easeOut(t, b, c, d) {
   return b+c*(tc + -3*ts + 3*t);
 }
 
-$("#remove").click(function(e) {
-  e.preventDefault();
+$("#remove").click(function(ev) {
+  ev.preventDefault();
   var uncheckedBoxes = $("input[type=checkbox]").not(":checked");
   $("input[type=checkbox]:checked").parent().remove();
   currentPlaces = [];
 
   var whatdoyouwantSound = document.getElementById("whatdoyouwant");
-  whatdoyouwantSound.play()
+  whatdoyouwantSound.play();
 
   for(var i = 0; i < (uncheckedBoxes).length; i++){
     console.log(uncheckedBoxes[i].value);
